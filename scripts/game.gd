@@ -1,11 +1,16 @@
 extends Node2D
 
+@onready var spawn_node: Node2D = $spawnNode
+@onready var camera_2d: Camera2D = $Camera2D
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	print(get_tree().get_nodes_in_group("EnemiesGroup"))
 	for enemy in get_tree().get_nodes_in_group("EnemiesGroup"):
 		enemy.died.connect(_on_died)
+		
+	spawn_player()
 
 func _on_died() -> void:
 	print(get_tree().get_nodes_in_group("EnemiesGroup").size()-1," left")
@@ -20,3 +25,24 @@ func _on_died() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+func spawn_player():
+	
+	print("spawning player")
+	var path = Gmanager.selected_character_path
+	
+	# If no character was selected (testing the scene directly), use a default
+	if path == "":
+		path = Gmanager.char_1_scene
+		
+	# 1. Load the scene
+	var character_scene = load(path)
+	# 2. Create an instance of it
+	var player = character_scene.instantiate()
+	
+	# 3. Position it at our spawn point
+	player.global_position = spawn_node.global_position
+	print(player.global_position)
+	# 4. Add it to the world
+	add_child(player)
+	camera_2d.reparent(player)

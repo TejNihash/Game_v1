@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="project2"
-run/main_scene="uid://dj73cmtveayu4"
+run/main_scene="uid://blubjh0q1o06w"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Bgm="*res://scenes/bgm.tscn"
+Gmanager="*res://scripts/game_manager.gd"
 
 [global_group]
 

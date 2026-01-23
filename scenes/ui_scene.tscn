@@ -1,0 +1,109 @@
+[gd_scene load_steps=6 format=3 uid="uid://blubjh0q1o06w"]
+
+[ext_resource type="Script" uid="uid://c0o0k44mpypch" path="res://scripts/ui_scene_script.gd" id="1_b2wvb"]
+[ext_resource type="Texture2D" uid="uid://b1ksfswwlhdat" path="res://assets/samurai_sprites/samurai_image.jpg" id="1_femh2"]
+[ext_resource type="Texture2D" uid="uid://cmugy2llvwmdx" path="res://assets/FreeKnight_v1/tired knight.jpg" id="2_b2wvb"]
+
+[sub_resource type="Theme" id="Theme_b2wvb"]
+
+[sub_resource type="FontVariation" id="FontVariation_b2wvb"]
+
+[node name="UI_scene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b2wvb")
+
+[node name="BG" type="ColorRect" parent="."]
+z_index = -2
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+theme = SubResource("Theme_b2wvb")
+color = Color(0.10942689, 0.24101886, 0.2442621, 0.14901961)
+
+[node name="Label" type="Label" parent="BG"]
+z_index = 6
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -379.0
+offset_top = -105.0
+offset_right = 379.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.9505734, 0.6457027, 0.76181686, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_b2wvb")
+theme_override_font_sizes/font_size = 50
+text = "Select your character"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -177.0
+offset_top = -87.0
+offset_right = 172.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 100
+
+[node name="Char1_vbox" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/Char1_vbox"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Char1_vbox/PanelContainer"]
+z_index = 13
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_femh2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="HBoxContainer/Char1_vbox"]
+layout_mode = 2
+text = "Old Samurai"
+
+[node name="Char2_vbox" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/Char2_vbox"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Char2_vbox/PanelContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_b2wvb")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="HBoxContainer/Char2_vbox"]
+layout_mode = 2
+text = "Depressed Knight
+"
