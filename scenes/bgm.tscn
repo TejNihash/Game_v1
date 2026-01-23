@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7v4l72aogixn"]
+
+[ext_resource type="AudioStream" uid="uid://duk5ovmqf5mqi" path="res://music/song_thirddistrict.ogg" id="1_q5y64"]
+
+[node name="bgm" type="AudioStreamPlayer"]
+stream = ExtResource("1_q5y64")
+volume_db = 7.633
+autoplay = true
