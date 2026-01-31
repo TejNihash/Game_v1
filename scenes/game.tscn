@@ -532,7 +532,7 @@ offset_bottom = 62.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(0, 200)
-text = "Help me make it better you piece of shit."
+text = "Hope you enjoyed it!"
 
 [node name="spawnNode" type="Node2D" parent="."]
 position = Vector2(290, -96)
