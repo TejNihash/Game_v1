@@ -4,5 +4,4 @@
 
 [node name="bgm" type="AudioStreamPlayer"]
 stream = ExtResource("1_q5y64")
-volume_db = 7.633
 autoplay = true

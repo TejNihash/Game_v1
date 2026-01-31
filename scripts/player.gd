@@ -13,6 +13,7 @@ var is_attacking = false
 @onready var attack_shape: CollisionShape2D = $weapon_pivot/AttackArea/CollisionShape2D
 @onready var weapon_pivot: Marker2D = $weapon_pivot
 
+@onready var player_collision_box: CollisionShape2D = $CollisionShape2D
 
 
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
@@ -33,7 +34,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 func _on_attack_area_area_entered(area: Area2D) -> void:
 	if is_attacking and area.has_method("take_damage"):
 		area.take_damage(25)
-		animation_player.play("attack1")
+		animation_player.play("attack_proper")
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -45,7 +46,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y = JUMP_VELOCITY
 		
 	#handle the attack
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_pressed("attack1"):
 		attack()
 
 		
@@ -57,9 +58,13 @@ func _physics_process(delta: float) -> void:
 	# this manages the direction
 	if direction > 0:
 		animated_sprite.flip_h  = false
+		player_collision_box.position.x = 5.0
+
 		weapon_pivot.scale.x = 1
 	elif direction < 0: 
 		animated_sprite.flip_h = true
+		player_collision_box.position.x = -5.0
+		
 		weapon_pivot.scale.x = -1
 		
 		

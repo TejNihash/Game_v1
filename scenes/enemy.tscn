@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://cg54g2ab0ociw"]
+[gd_scene load_steps=17 format=3 uid="uid://cg54g2ab0ociw"]
 
 [ext_resource type="Script" uid="uid://dbwd5bag5an1w" path="res://scripts/enemy.gd" id="1_md0e3"]
 [ext_resource type="Texture2D" uid="uid://dgei3xmikho6i" path="res://assets/slime_green.png" id="2_4ra3w"]
+[ext_resource type="AudioStream" uid="uid://4w6k7mvniqhu" path="res://music/tap.wav" id="3_4ra3w"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8tegq"]
 radius = 6.0
@@ -76,6 +77,91 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="Animation" id="Animation_5uy6h"]
+resource_name = "hit_animation"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.16666667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.16, 0.32, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"hit"]
+}
+
+[sub_resource type="Animation" id="Animation_c4w8v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"hit"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xwavj"]
+_data = {
+&"RESET": SubResource("Animation_c4w8v"),
+&"hit_animation": SubResource("Animation_5uy6h")
+}
+
 [node name="Area2D" type="Area2D" groups=["EnemiesGroup"]]
 collision_layer = 2
 collision_mask = 0
@@ -90,11 +176,18 @@ position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_7p1mj")
 animation = &"hit"
 autoplay = "default"
-frame = 3
-frame_progress = 1.0
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xwavj")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_4ra3w")
+volume_db = 16.64
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="died" from="." to="." method="_on_died"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

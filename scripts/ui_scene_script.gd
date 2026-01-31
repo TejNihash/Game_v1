@@ -21,5 +21,6 @@ func _on_char2_selected():
 
 func start_game():
 	# Simple scene transition
-	get_tree().change_scene_to_file("res://scenes/game.tscn")
+	#get_tree().change_scene_to_file("res://scenes/game.tscn")
+	Transistion.fade_to_scene("res://scenes/game.tscn")
 	

@@ -7,16 +7,51 @@ const JUMP_VELOCITY = -400.0
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 var is_attacking = false
 
-func attack():
+@onready var state_machine: Node = $StateMachine
+@onready var collision_shape_2d: CollisionShape2D = $hitbox/CollisionShape2D
+
+func _ready() -> void:
+	state_machine.init(self)
+	#collision_shape_2d.disabled= true
+	
+	
+	
+
+func attack1():
 	is_attacking = true
 	#attack_shape.disabled = false
-
 	animated_sprite.play("attack1")
 	# We turn the shape ON. It will now "listen" for collisions.
+func attack2():
+	is_attacking = true
+	#attack_shape.disabled = false
+	animated_sprite.play("attack2")
+	# We turn the shape ON. It will now "listen" for collisions.
+func combo_attack():
+	is_attacking = true
+	#attack_shape.disabled = false
+	animated_sprite.play("combo_attack")
+	# We turn the shape ON. It will now "listen" for collisions.
+	
+func enable_hitbox(name: String):
+	$hitbox.get_node(name).monitoring = true
+
+func disable_hitbox(name: String):
+	$hitbox.get_node(name).monitoring = false
+
+func disable_all_hitboxes():
+	pass
+	"""for h in $hitbox.get_children():
+		h.monitoring = false"""
+
 
 func _physics_process(delta: float) -> void:
+	
+	move_and_slide()
+
 	# Add the gravity.
-	if not is_on_floor():
+	
+"""	if not is_on_floor():
 		velocity += get_gravity() * delta
 
 	# Handle jump.
@@ -24,8 +59,12 @@ func _physics_process(delta: float) -> void:
 		velocity.y = JUMP_VELOCITY
 		
 	#handle the attack
-	if Input.is_action_just_pressed("attack"):
-		attack()
+	if Input.is_action_just_pressed("attack1"):
+		attack1()
+	elif Input.is_action_just_pressed("attack2"):
+		attack2()
+	elif Input.is_action_just_pressed("combo_attack"):
+		combo_attack()
 
 		
 
@@ -61,11 +100,4 @@ func _physics_process(delta: float) -> void:
 			velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-
-	move_and_slide()
-
-
-func _on_animated_sprite_2d_animation_finished() -> void:
-	 # Replace with function body.
-	if animated_sprite.animation == "attack1":
-		is_attacking = false
+"""

@@ -9,6 +9,7 @@
 [sub_resource type="FontVariation" id="FontVariation_b2wvb"]
 
 [node name="UI_scene" type="Control"]
+z_index = 11
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
