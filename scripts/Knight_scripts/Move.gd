@@ -1,6 +1,9 @@
 extends State
 
-@onready var collision_shape_2d: CollisionShape2D = $"../../hitbox/CollisionShape2D"
+@onready var collision_shape_body: CollisionShape2D = $"../../CollisionShape2D"
+@onready var attack_1_shape: CollisionShape2D = $"../../Visual_pivot/hitbox/attack1_shape"
+
+@onready var visual_pivot: Node2D = $"../../Visual_pivot"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -27,16 +30,21 @@ func update(delta):
 	# this manages the direction
 	
 	if direction > 0:
-		character.animated_sprite.flip_h  = false
+		"""character.animated_sprite.flip_h  = false
 		collision_shape_2d.position.x = 38.0
+		collision_shape_body.position.x = -4"""
+		visual_pivot.scale.x = 1
 		#weapon_pivot.scale.x = 1
 	elif direction < 0: 
-		character.animated_sprite.flip_h = true
+		"""character.animated_sprite.flip_h = true
 		collision_shape_2d.position.x = -38.0
+		collision_shape_body.position.x = 4"""
+		visual_pivot.scale.x = -1
 
+		
 		#weapon_pivot.scale.x = -14
 	if direction !=0:
-		character.get_node("AnimatedSprite2D").play("run")
+		%AnimatedSprite2D.play("run")
 		character.velocity.x = direction * character.SPEED
 	
 	if direction ==0:
@@ -46,7 +54,8 @@ func update(delta):
 		state_machine.change_state("Idle")
 		
 
-	if Input.is_action_just_pressed("attack1"):
+	#if Input.is_action_just_pressed("attack1"):
+	if check_attack():
 		state_machine.change_state("Attack")
 	if Input.is_action_just_pressed("jump"):
 		state_machine.change_state("Jump")

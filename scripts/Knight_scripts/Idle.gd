@@ -7,8 +7,7 @@ func enter():
 	#stop moving
 	#character.velocity.x = move_toward(character.velocity.x, 0, character.SPEED)
 	character.velocity.x = 0
-	if character.has_node("AnimatedSprite2D"):
-		character.get_node("AnimatedSprite2D").play("idle")
+	%AnimatedSprite2D.play("idle")
 	
 
 func update(delta):
@@ -18,8 +17,10 @@ func update(delta):
 	if direction != 0:
 		#we move right?
 		state_machine.change_state("Move")
-	elif Input.is_action_just_pressed("attack1"):
+	elif check_attack():
 		state_machine.change_state("Attack")
+	#elif Input.is_action_just_pressed("attack1"):
+	#	state_machine.change_state("Attack")
 		
 	else:
 		#just the general physics related stuff

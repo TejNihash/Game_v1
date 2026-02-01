@@ -4,15 +4,12 @@ extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 var is_attacking = false
 
 @onready var state_machine: Node = $StateMachine
-@onready var collision_shape_2d: CollisionShape2D = $hitbox/CollisionShape2D
 
 func _ready() -> void:
 	state_machine.init(self)
-	#collision_shape_2d.disabled= true
 	
 	
 	
@@ -20,17 +17,17 @@ func _ready() -> void:
 func attack1():
 	is_attacking = true
 	#attack_shape.disabled = false
-	animated_sprite.play("attack1")
+	%AnimatedSprite2D.play("attack1")
 	# We turn the shape ON. It will now "listen" for collisions.
 func attack2():
 	is_attacking = true
 	#attack_shape.disabled = false
-	animated_sprite.play("attack2")
+	%AnimatedSprite2D.play("attack2")
 	# We turn the shape ON. It will now "listen" for collisions.
 func combo_attack():
 	is_attacking = true
 	#attack_shape.disabled = false
-	animated_sprite.play("combo_attack")
+	%AnimatedSprite2D.play("combo_attack")
 	# We turn the shape ON. It will now "listen" for collisions.
 	
 func enable_hitbox(name: String):
@@ -74,10 +71,10 @@ func _physics_process(delta: float) -> void:
 	
 	# this manages the direction
 	if direction > 0:
-		animated_sprite.flip_h  = false
+		%AnimatedSprite2D.flip_h  = false
 		#weapon_pivot.scale.x = 1
 	elif direction < 0: 
-		animated_sprite.flip_h = true
+		%AnimatedSprite2D.flip_h = true
 		#weapon_pivot.scale.x = -1
 		
 		
@@ -86,12 +83,12 @@ func _physics_process(delta: float) -> void:
 	if not is_attacking:
 		if is_on_floor():
 			if direction == 0:
-				animated_sprite.play("idle")
+				%AnimatedSprite2D.play("idle")
 			else:
-				animated_sprite.play("run")
+				%AnimatedSprite2D.play("run")
 				
 		else:
-			animated_sprite.play("jump")
+			%AnimatedSprite2D.play("jump")
 	
 	if direction:
 		if is_attacking:

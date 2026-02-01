@@ -4,7 +4,7 @@ extends Node
 
 var character
 var current_state: State
-
+var attack_action:String = "Null"
 
 func init(_character):
 	character = _character

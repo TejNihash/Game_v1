@@ -1,5 +1,6 @@
 extends State
 
+@onready var animated_sprite_2d: AnimatedSprite2D = %AnimatedSprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,7 +14,7 @@ func _process(delta: float) -> void:
 func enter():
 	if character.is_on_floor():
 		character.velocity.y = character.JUMP_VELOCITY
-	character.get_node("AnimatedSprite2D").play("jump")
+	%AnimatedSprite2D.play("jump")
 
 	
 func update(delta):
@@ -31,9 +32,10 @@ func update(delta):
 		else:
 			state_machine.change_state("Move")
 		
-	if Input.is_action_just_pressed("attack1"):
-		state_machine.change_state("Attack")
-		
+	#if Input.is_action_just_pressed("attack1"):
+	#	state_machine.change_state("Attack")
+	if check_attack():
+		state_machine.change_state("Attack")	
 		
 	
 func exit():
