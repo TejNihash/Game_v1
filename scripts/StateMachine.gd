@@ -9,7 +9,8 @@ var attack_action:String = "Null"
 func init(_character):
 	character = _character
 	
-	for state in get_children():
+	for state: State in get_children():
+		print(state)
 		state.character = _character
 		state.state_machine = self
 		

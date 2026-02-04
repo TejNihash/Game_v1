@@ -24,6 +24,7 @@ Transistion="*res://scenes/transistion_scene.tscn"
 [global_group]
 
 EnemiesGroup=""
+PlayersGroup="Put all the characters playable"
 
 [input]
 

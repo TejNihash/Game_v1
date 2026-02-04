@@ -12,6 +12,7 @@ func take_damage(amount: int):
 	print("Enemy hit! Health remaining: ", health)
 
 func _ready():
+	
 	add_to_group("EnemiesGroup")
 
 

@@ -1,5 +1,6 @@
 extends State
 
+var attack
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,7 +17,8 @@ func _process(delta: float) -> void:
 
 func enter():
 	#animated_sprite_2d.play("attack1")
-	var attack = state_machine.attack_action
+	attack = state_machine.attack_action
+	character.curr_attack = attack
 	animation_player.play(attack)
 	
 	

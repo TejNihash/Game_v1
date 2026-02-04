@@ -18,6 +18,10 @@ var is_attacking = false
 
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 
+func _ready() -> void:
+	add_to_group("PlayersGroup")
+
+
 func attack():
 	is_attacking = true
 	attack_shape.disabled = false

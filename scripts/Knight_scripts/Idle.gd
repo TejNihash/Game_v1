@@ -17,7 +17,7 @@ func update(delta):
 	if direction != 0:
 		#we move right?
 		state_machine.change_state("Move")
-	elif check_attack():
+	elif character.check_attack():
 		state_machine.change_state("Attack")
 	#elif Input.is_action_just_pressed("attack1"):
 	#	state_machine.change_state("Attack")

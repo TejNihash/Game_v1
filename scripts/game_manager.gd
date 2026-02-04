@@ -1,5 +1,6 @@
 extends Node
 
+signal player_died
 # This holds the scene path of the chosen character
 var selected_character_path: String = ""
 

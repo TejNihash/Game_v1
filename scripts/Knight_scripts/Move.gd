@@ -19,8 +19,6 @@ func enter():
 	pass
 	
 
-
-	
 func update(delta):
 	var direction := Input.get_axis("move_left", "move_right")
 	
@@ -30,19 +28,11 @@ func update(delta):
 	# this manages the direction
 	
 	if direction > 0:
-		"""character.animated_sprite.flip_h  = false
-		collision_shape_2d.position.x = 38.0
-		collision_shape_body.position.x = -4"""
-		visual_pivot.scale.x = 1
-		#weapon_pivot.scale.x = 1
-	elif direction < 0: 
-		"""character.animated_sprite.flip_h = true
-		collision_shape_2d.position.x = -38.0
-		collision_shape_body.position.x = 4"""
-		visual_pivot.scale.x = -1
 
-		
-		#weapon_pivot.scale.x = -14
+		character.flip_body(1)
+	elif direction < 0: 
+		character.flip_body(-1)
+
 	if direction !=0:
 		%AnimatedSprite2D.play("run")
 		character.velocity.x = direction * character.SPEED
@@ -55,7 +45,7 @@ func update(delta):
 		
 
 	#if Input.is_action_just_pressed("attack1"):
-	if check_attack():
+	if character.check_attack():
 		state_machine.change_state("Attack")
 	if Input.is_action_just_pressed("jump"):
 		state_machine.change_state("Jump")

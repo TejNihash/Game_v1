@@ -23,7 +23,6 @@ func update(delta):
 	#check for input. 
 	#if normal movement, it will be handled normally so don't bother. 
 	if not character.is_on_floor():
-		character.velocity += character.get_gravity() * delta
 		character.velocity.x = direction * character.SPEED
 
 	else:
@@ -34,7 +33,7 @@ func update(delta):
 		
 	#if Input.is_action_just_pressed("attack1"):
 	#	state_machine.change_state("Attack")
-	if check_attack():
+	if character.check_attack():
 		state_machine.change_state("Attack")	
 		
 	
