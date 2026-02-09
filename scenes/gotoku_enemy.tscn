@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://8ao7gcd04hlk"]
+[gd_scene load_steps=83 format=3 uid="uid://8ao7gcd04hlk"]
 
 [ext_resource type="Texture2D" uid="uid://dka85rn8jesbx" path="res://assets/craftpix-net-872297-free-ghost-pixel-art-sprite-sheets/Gotoku/Idle.png" id="1_brrhv"]
 [ext_resource type="Script" uid="uid://c6u7ta7w3eju2" path="res://scripts/gotoku_enemy.gd" id="1_y8723"]
@@ -144,6 +144,34 @@ tracks/2/keys = {
 "values": [true, false, true]
 }
 
+[sub_resource type="Animation" id="Animation_36uim"]
+resource_name = "Death"
+length = 0.33
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual_pivot/AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Death"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visual_pivot/AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
 [sub_resource type="Animation" id="Animation_aadre"]
 length = 0.001
 tracks/0/type = "value"
@@ -212,6 +240,7 @@ _data = {
 &"Attack1": SubResource("Animation_bn4vp"),
 &"Attack2": SubResource("Animation_m5sw6"),
 &"Attack3": SubResource("Animation_pf7vt"),
+&"Death": SubResource("Animation_36uim"),
 &"RESET": SubResource("Animation_aadre")
 }
 
@@ -460,7 +489,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_8thn6")
 }],
 "loop": false,
-"name": &"Die",
+"name": &"Death",
 "speed": 15.0
 }, {
 "frames": [{
@@ -605,7 +634,12 @@ func exit():
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite_2d.animation=='Hurt':
-		state_machine.change_state(\"Idle\")
+
+		var random_index = randi_range(0, 1)
+		var random_state = [\"Idle\",\"Run\"][random_index]
+		state_machine.change_state(random_state)
+
+	
 "
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_srdj1"]
@@ -630,19 +664,20 @@ height = 8
 fill_from = Vector2(1, 0)
 fill_to = Vector2(1, 1)
 
-[sub_resource type="SystemFont" id="SystemFont_hlefd"]
+[sub_resource type="SystemFont" id="SystemFont_0d8uw"]
 font_stretch = 50
+subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_xl4om"]
-font = SubResource("SystemFont_hlefd")
-font_size = 9
+font = SubResource("SystemFont_0d8uw")
+font_size = 6
 font_color = Color(10.018106, 9.877248, 9.454674, 1)
 outline_color = Color(0.013862697, 0.102583475, 0.09963829, 1)
 shadow_size = 17
 shadow_color = Color(0.2784314, 0.24705882, 0.2509804, 0)
 
 [node name="Gotoku_enemy" type="CharacterBody2D"]
-scale = Vector2(0.8, 0.8)
+scale = Vector2(0.7, 0.7)
 script = ExtResource("1_y8723")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -728,18 +763,19 @@ offset_right = 32.75
 offset_bottom = -36.75
 texture_under = SubResource("GradientTexture2D_nbfs6")
 texture_progress = SubResource("GradientTexture2D_0d8uw")
-tint_progress = Color(1, 0.4392157, 0.2784314, 1)
 script = ExtResource("19_36uim")
 
 [node name="Label" type="Label" parent="."]
-offset_left = -31.25
-offset_top = -55.0
-offset_right = 25.75
-offset_bottom = -41.0
-text = "Gotoku"
+offset_left = -31.428572
+offset_top = -52.857143
+offset_right = 25.571428
+offset_bottom = -38.857143
+text = "Gotoku the ugly"
 label_settings = SubResource("LabelSettings_xl4om")
 uppercase = true
 
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Attack" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Death" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="Visual_pivot/AnimatedSprite2D" to="StateMachine/Hurt" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="Visual_pivot/AnimatedSprite2D" to="StateMachine/Death" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="area_entered" from="Visual_pivot/hurt_box" to="Visual_pivot/hurt_box" method="_on_area_entered"]

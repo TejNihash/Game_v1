@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=3 uid="uid://bl53gaq3squww"]
+[gd_scene load_steps=99 format=3 uid="uid://bl53gaq3squww"]
 
 [ext_resource type="Texture2D" uid="uid://cfqn7tle17ks6" path="res://assets/FreeKnight_v1/Colour2/Outline/120x80_PNGSheets/_Attack.png" id="1_k2txo"]
 [ext_resource type="Script" uid="uid://c6g7rtop3obqq" path="res://scripts/knight.gd" id="1_mvyd6"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://dsrva5nj23u78" path="res://scripts/Hurt_box.gd" id="13_tpjby"]
 [ext_resource type="Script" uid="uid://boo54ftaheog6" path="res://scripts/Hit_box.gd" id="14_ouiji"]
 [ext_resource type="Script" uid="uid://ddqbcifxkvm40" path="res://scripts/Knight_scripts/Hurt.gd" id="20_ouiji"]
+[ext_resource type="Script" uid="uid://dr34nuf3gltsa" path="res://scripts/Knight_scripts/Death.gd" id="21_o7g6j"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_21nkr"]
 
@@ -757,6 +758,9 @@ script = ExtResource("13_4ok4f")
 
 [node name="Hurt" type="Node" parent="StateMachine"]
 script = ExtResource("20_ouiji")
+
+[node name="Death" type="Node" parent="StateMachine"]
+script = ExtResource("21_o7g6j")
 
 [connection signal="animation_finished" from="Visual_pivot/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="Visual_pivot/AnimatedSprite2D" to="StateMachine/Attack" method="_on_animated_sprite_2d_animation_finished"]

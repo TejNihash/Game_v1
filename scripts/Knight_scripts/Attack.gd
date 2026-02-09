@@ -40,7 +40,7 @@ func exit():
 
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
-	print("hit")
+	#print("hit")
 	if area.has_method("take_damage"):
 		area.take_damage(25)
 		
@@ -50,7 +50,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	 # Replace with function body.
 	if anim_name==state_machine.attack_action:
-		print("attack is done playing")
+		#print("attack is done playing")
 		if not character.is_on_floor():
 			state_machine.change_state("Jump")
 		else:

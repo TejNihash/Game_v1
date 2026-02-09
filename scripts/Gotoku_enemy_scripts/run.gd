@@ -29,14 +29,19 @@ func update(delta):
 		visual_pivot.scale.x = -1
 		
 	#make him move that way too.
-	if enemy.enemy_to_player_dist()< enemy.chase_distance:
+	#short distance states first
+	
+	if enemy.enemy_to_player_dist()<enemy.attack_distance:
+		state_machine.change_state("Attack")
+	elif enemy.enemy_to_player_dist()< enemy.chase_distance:
 		enemy.velocity.x = direction*enemy.SPEED
+		
+
 	else:
 		state_machine.change_state("Idle")
 	
 	
-	if enemy.enemy_to_player_dist()<enemy.attack_distance:
-		state_machine.change_state("Attack")
+
 
 
 func exit():

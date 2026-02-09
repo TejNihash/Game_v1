@@ -11,9 +11,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-
 func enter():
-	animated_sprite_2d.play("hurt")
+	character.velocity.x = 0
+	animated_sprite_2d.play("death_no_move")
+	
 func update(delta):
 	pass
 	
@@ -22,7 +23,6 @@ func exit():
 	
 
 
-
 func _on_animated_sprite_2d_animation_finished() -> void:
-	if animated_sprite_2d.animation == 'hurt':
-		state_machine.change_state("Idle")
+	if animated_sprite_2d.animation == 'death_no_move':
+		queue_free()

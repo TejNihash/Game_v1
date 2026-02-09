@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://ctbm4q3ftejbx"]
+
+[ext_resource type="Script" uid="uid://bp3rhuan4g7a2" path="res://scripts/Yurei_enemy_scripts/a_3_charge.gd" id="1_5grne"]
+[ext_resource type="Texture2D" uid="uid://ck12tpqgu6foj" path="res://assets/craftpix-net-872297-free-ghost-pixel-art-sprite-sheets/Yurei/Charge_1.png" id="1_b8m51"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5grne"]
+atlas = ExtResource("1_b8m51")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_72c2i"]
+atlas = ExtResource("1_b8m51")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmvgg"]
+atlas = ExtResource("1_b8m51")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h1054"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5grne")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_72c2i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmvgg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_72c2i"]
+radius = 2.0
+height = 12.0
+
+[node name="A3_charge" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_5grne")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_h1054")
+frame_progress = 0.009084071
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_72c2i")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

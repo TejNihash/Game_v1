@@ -34,7 +34,7 @@ var damage_data = {
 
 
 
-var health = 1000
+var health = 100
 var max_health  = 1000
 
 const KNOCKBACK_RESIST := 1.0
@@ -51,6 +51,7 @@ func take_damage(data: Dictionary,opp_pos) -> void:
 	apply_knockback(data,opp_pos)
 	if health <= 0:
 		Gmanager.player_died.emit()
+		state_machine.change_state("Death")
 
 
 func apply_knockback(data: Dictionary,opp_pos) -> void:

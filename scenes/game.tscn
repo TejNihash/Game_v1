@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dj73cmtveayu4"]
+[gd_scene load_steps=25 format=3 uid="uid://dj73cmtveayu4"]
 
 [ext_resource type="Texture2D" uid="uid://bwcio8qrt7a1m" path="res://assets/oakwoods/background/background_layer_1.png" id="1_0tnpc"]
 [ext_resource type="Script" uid="uid://nsybewvpnjcs" path="res://scripts/game.gd" id="1_kvuet"]
@@ -12,8 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://dlsttw17ffv5x" path="res://assets/oakwoods/background/background_layer_3.png" id="7_ir15t"]
 [ext_resource type="Texture2D" uid="uid://deciycbd7dxh1" path="res://assets/oakwoods/decorations/grass_3.png" id="8_kvuet"]
 [ext_resource type="PackedScene" uid="uid://cg54g2ab0ociw" path="res://scenes/enemy.tscn" id="13_kvuet"]
-[ext_resource type="PackedScene" uid="uid://8ao7gcd04hlk" path="res://scenes/gotoku_enemy.tscn" id="13_trtic"]
 [ext_resource type="Script" uid="uid://bgagnjtxh401w" path="res://scripts/player_health_bar.gd" id="14_trtic"]
+[ext_resource type="PackedScene" uid="uid://8ao7gcd04hlk" path="res://scenes/gotoku_enemy.tscn" id="15_ca42v"]
+[ext_resource type="PackedScene" uid="uid://bdsw0of7d0m1w" path="res://scenes/Yurei_scenes/yurei_enemy.tscn" id="15_ir15t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjtg"]
 texture = ExtResource("1_yqjtg")
@@ -565,7 +566,7 @@ position = Vector2(290, -96)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(293, -128)
-zoom = Vector2(2, 2)
+zoom = Vector2(3, 3)
 limit_left = -50
 limit_top = -250
 limit_right = 1050
@@ -654,9 +655,6 @@ position = Vector2(1038, 6)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="world/right_boundary"]
 shape = SubResource("WorldBoundaryShape2D_kvuet")
 
-[node name="Gotoku_enemy" parent="." instance=ExtResource("13_trtic")]
-position = Vector2(587, -43)
-
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 2
 
@@ -676,3 +674,9 @@ offset_right = 60.0
 offset_bottom = 27.0
 text = "Player"
 label_settings = SubResource("LabelSettings_trtic")
+
+[node name="Yurei_enemy" parent="." instance=ExtResource("15_ir15t")]
+position = Vector2(847, -105)
+
+[node name="Gotoku_enemy" parent="." instance=ExtResource("15_ca42v")]
+position = Vector2(541, -22)

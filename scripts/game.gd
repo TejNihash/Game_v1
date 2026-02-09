@@ -47,6 +47,7 @@ func spawn_player():
 	add_child(player)
 	camera_2d.reparent(player)
 	player_health_bar.connect_to_player(player) #connects player to healthbar
+	player_health_bar.update_bar(player.health,player.max_health) #call that function right here once.
 	print(player)
 
 
