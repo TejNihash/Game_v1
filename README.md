@@ -1,1 +1,2 @@
-Making a little game using Godot.
+A little game made using Godot.
+
